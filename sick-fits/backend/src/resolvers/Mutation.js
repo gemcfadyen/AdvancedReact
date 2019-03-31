@@ -1,11 +1,14 @@
+// Where we interact with the Prisma database
+
 const Mutations = {
-  createDog(parent, args, ctx, info) {
-    global.dogs = global.dogs || [];
-    console.log(args);
-    //crate a dog
-    const newDog = {name: args.name};
-    global.dogs.push(newDog);
-    return newDog;
+  async createItem(parent, args, ctx, info) {
+    console.log(`The args are ${args}`);
+    const item = await ctx.db.mutation.createItem({
+      data: {
+        ...args //because all the item details are in the args, we can spread them here
+      }
+    }, info);
+    return item;
   }
 };
 

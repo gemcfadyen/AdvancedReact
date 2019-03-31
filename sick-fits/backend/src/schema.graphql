@@ -1,12 +1,17 @@
-type Dog {
-    name: String!
-}
+# This is the public facing api, so what you use when doing the queries in graphql
+
+# import * from "./generated/prisma.graphql"
 
 type Mutation {
-  createDog(name: String!) : Dog
+  createItem(
+    title: String
+    description: String
+    price: Int
+    image: String
+    largeImage: String
+  ): Item!
 }
 
 type Query {
-  dogs: [Dog]!
+  items: [Item]!
 }
-
