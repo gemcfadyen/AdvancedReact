@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Mutation} from "react-apollo";
 import Router from "next/router"
 import Form from "./styles/Form";
-import formatMoney from "../lib/formatMoney";
 import gql from "graphql-tag";
 import Error from "./ErrorMessage";
 
@@ -67,6 +66,7 @@ class CreateItem extends Component {
             const result = await createItemFunction();
             //route user to product page
             console.log(result)
+            Router.push({pathname:"/item", query:{id: result.data.createItem.id}})
             Router.push({pathname:"/item", query:{id: result.data.createItem.id}})
           }}>
             <Error error={error}/>
