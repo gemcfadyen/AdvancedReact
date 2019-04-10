@@ -50,7 +50,7 @@ class Items extends Component {
               console.log(`data is ${data.items}`)
               return <ItemsList>
                 {data.items.map((item) =>
-                  <Item key={item.id} item={item} />
+                  <Item key={item.id} item={item}/>
                 )}
               </ItemsList>
             }

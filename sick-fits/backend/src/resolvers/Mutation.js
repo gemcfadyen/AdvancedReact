@@ -17,10 +17,25 @@ const Mutations = {
     //copy of updates
     const updates = { ...args };
     delete updates.id;
-    return ctx.db.mutation.updateItem({
-      data: updates,
-      where: { id: args.id }
-    }, info);
+    return ctx.db.mutation.updateItem(
+      {
+        data: updates,
+        where: { id: args.id }
+      },
+      info
+    );
+  },
+
+  async deleteItem(parent, args, ctx, info) {
+    const where = { id: args.id };
+    //find the item
+    const item = await ctx.db.query.item({ where }, "{id, title}");
+
+    //check the user has the permissions to delete
+    //todo
+
+    //delete it
+    return ctx.db.mutation.deleteItem({where}, info)
   }
 };
 
