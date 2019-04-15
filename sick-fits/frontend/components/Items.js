@@ -40,19 +40,14 @@ class Items extends Component {
         <Query query={ALL_ITEMS_QUERY} variables={{skip: this.props.page * perPage - perPage, first: perPage}}>
           {
             ({data, error, loading}) => {
-              console.log("QUERY.......!")
-              console.log(`page = ${this.props.page} and perpage is ${perPage}`)
               if (loading) {
-                console.log("loading")
                 return <p> Loading...</p>
               }
 
               if (error) {
-                console.log("error")
                 return <p> Error: {error.message}</p>
               }
-              console.log(data)
-              console.log(`data is ${data.items}`)
+
               return <ItemsList>
                 {data.items.map((item) =>
                   <Item key={item.id} item={item}/>

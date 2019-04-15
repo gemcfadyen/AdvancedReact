@@ -35,24 +35,18 @@ class UpdateItem extends Component {
 
   handleChange = (e) => {
     const {name, type, value} = e.target;
-    console.log({name, type, value});
     const valueOfCorrectType = (type === "number") ? parseFloat(value) : value;
     this.setState({[name]: valueOfCorrectType});
   };
 
   updateItem = async (updateEvent, updateItemMutation) => {
     updateEvent.preventDefault();
-    console.log("updateing item!");
-    console.log(this.state);
-    console.log(this.props.id)
     const response = await updateItemMutation({
       variables: {
         id: this.props.id,
         ...this.state
       }
     });
-    console.log(response);
-    console.log("updated!")
   }
 
   render() {
@@ -91,7 +85,7 @@ class UpdateItem extends Component {
                              onChange={this.handleChange}/>
                     </label>
 
-                    <button type="submit">Sav{loading? "ing" : "e"} Changes</button>
+                    <button type="submit">Sav{loading ? "ing" : "e"} Changes</button>
                   </fieldset>
                 </Form>
               )}

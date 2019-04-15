@@ -1,10 +1,9 @@
 // Where we interact with the Prisma database
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const Mutations = {
   async createItem(parent, args, ctx, info) {
-    console.log(`The args are ${args}`);
     const item = await ctx.db.mutation.createItem(
       {
         data: {
@@ -15,6 +14,7 @@ const Mutations = {
     );
     return item;
   },
+
   updateItem(parent, args, ctx, info) {
     //copy of updates
     const updates = {...args};
@@ -43,7 +43,7 @@ const Mutations = {
     args.email = args.email.toLowerCase();
     args.password = await bcrypt.hash(args.password, 10);
 
-    const user = ctx.db.mutation.createUser({
+    const user = await ctx.db.mutation.createUser({
       data: {
         ...args,
         permissions: {set: ["USER"]}
@@ -51,12 +51,14 @@ const Mutations = {
     }, info);
 
     //create jwt token for the user
-    const token = jwt.sign({userId: user.id}, process.env.APP_SECRET)
+    const token = jwt.sign({userId: user.id}, process.env.APP_SECRET);
     //set jwt as cookie on the response
-    ctx.response.cookie('token', token, {
+    console.log("In signup - the token is")
+    console.log(token)
+    ctx.response.cookie("token", token, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365 //one year cookie
-    })
+    });
     return user;
   }
 };

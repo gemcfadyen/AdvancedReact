@@ -44,7 +44,6 @@ class SingleItem extends Component {
           if (loading) {
             return <p>Loading</p>
           }
-          console.log(data)
 
           if (!data.item) {
             return <p>No item found for {this.props.id}</p>
