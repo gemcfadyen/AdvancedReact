@@ -1,6 +1,9 @@
 # This is the public facing api, so what you use when doing the queries in graphql
 
 # import * from "./generated/prisma.graphql"
+type SuccessMessage {
+  message: String
+}
 
 type Mutation {
   createItem(
@@ -13,6 +16,8 @@ type Mutation {
   updateItem(id: ID!, title: String, description: String, price: Int): Item!
   deleteItem(id: ID!): Item
   signup(email: String! name: String! password: String!) : User!
+  signin(email: String! password: String!) : User!
+  signout: SuccessMessage
 }
 
 type Query {
