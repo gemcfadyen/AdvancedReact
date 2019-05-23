@@ -4,11 +4,11 @@ import gql from "graphql-tag";
 import {ALL_ITEMS_QUERY} from "./Items";
 
 const DELETE_ITEM_MUTATION = gql`
-    mutation DELETE_ITEM_MUTATION($id: ID!){
-        deleteItem(id: $id){
-            id
-        }
+  mutation DELETE_ITEM_MUTATION($id: ID!){
+    deleteItem(id: $id){
+      id
     }
+  }
 `
 
 class DeleteItem extends Component {
@@ -28,7 +28,7 @@ class DeleteItem extends Component {
         {(deleteItemFunction, {error}) => (
           <button onClick={() => {
             if (confirm("Are you sure you want to delete this item?")) {
-              deleteItemFunction();
+              deleteItemFunction().catch(err => alert(err.message));
             }
           }}>
             {this.props.children}

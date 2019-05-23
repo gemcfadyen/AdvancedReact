@@ -1,6 +1,8 @@
 import React from "react";
 import Nav from "./Nav";
 import Link from "next/link";
+import Cart from "./Cart";
+
 import styled from "styled-components";
 import Router from "next/router";
 import NProgress from "nprogress";
@@ -75,8 +77,7 @@ class Header extends React.Component {
         <div className="sub-bar">
           <p>Search</p>
         </div>
-
-        <div>Cart</div>
+        <Cart/>
       </StyledHeader>
     );
   }
